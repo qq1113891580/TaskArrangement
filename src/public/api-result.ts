@@ -2,7 +2,6 @@
 
 export interface ApiResult<T> {
   Code?: any;
-  Count?: any;
-  Data?: any;
-  Msg?: string;
+  Info?: any;
+  Status?: any;
 }

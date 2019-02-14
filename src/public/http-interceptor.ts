@@ -86,26 +86,26 @@ export class AuthInterceptor implements HttpInterceptor {
     // const authHeader = 'bearer ' + this.userInfo.GetToken();
     const authHeader = 'bearer ';
     // 用 FormData 传参给后台
-    // const authReq = req.url.startsWith('~')
-    //   ? req.clone({
-    //       url: this.apiUrl + req.url.slice(1)
-    //     })
-    //   : req.clone({
-    //       headers: req.headers
-    //         .set('Authorization', authHeader)
-    //         .set('Content-Type', 'application/x-www-form-urlencoded'),
-    //       url: this.apiUrl + req.url,
-    //       body: this.param(req.body)
-    //     });
+    const authReq = req.url.startsWith('~')
+      ? req.clone({
+          url: this.apiUrl + req.url.slice(1)
+        })
+      : req.clone({
+          headers: req.headers
+            .set('Authorization', authHeader)
+            .set('Content-Type', 'application/x-www-form-urlencoded'),
+          url: this.apiUrl + req.url,
+          body: this.param(req.body)
+        });
 
     // 用 RequestPayload 传参给后台
-    const authReq = req.clone({
-      headers: req.headers
-        .set('Authorization', authHeader)
-        .set('Content-Type', 'application/json'),
-      url: this.apiUrl + req.url,
-      body: req.body
-    });
+    // const authReq = req.clone({
+    //   headers: req.headers
+    //     .set('Authorization', authHeader)
+    //     .set('Content-Type', 'application/json'),
+    //   url: this.apiUrl + req.url,
+    //   body: req.body
+    // });
     // 避免连续多个loading闪屏
     if (this.requestCount <= 0) {
       // this.commonhelper.presentLoading();

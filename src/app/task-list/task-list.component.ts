@@ -10,30 +10,49 @@ import { TaskModelComponent } from '../task-model/task-model.component';
 })
 export class TaskListComponent implements OnInit {
   mylist = [];
-  animal: string;
-  name: string;
+  /** 请求任务列表接口所需的数据 */
   GAT: GetAllotTasksModel = {
-    search: '',
-    pageIndex: 1,
+    // search: '',
+    pageIndex: 0,
     pageSize: 100
   };
 
-  constructor(public service: Service, public dialog: MatDialog) {
-    this.service.GetAllotTasks(this.GAT).subscribe(v => {});
+  constructor(public service: Service, public dialog: MatDialog) {}
+
+  ngOnInit() {
+    this.GetAllotTasks();
   }
 
-  ngOnInit() {}
+  /** 获取任务列表 */
+  GetAllotTasks() {
+    this.service.GetAllotTasks(this.GAT).subscribe(r => {
+      if (r.Status) {
+        this.mylist = r.Info.Data;
+      }
+    });
+  }
 
-  openDialog(): void {
+  /** 开启模态框 */
+  openDialog(operation: string, data: any): void {
     const dialogRef = this.dialog.open(TaskModelComponent, {
-      width: '250px',
-      data: { name: this.name, animal: this.animal }
+      data: { o: operation, d: data }
     });
     // 关闭对话框之后处理消息。此方法返回一个可观察对象，通过订阅这个可观察对
     // 象来处理对话框返回的通知消息。
     dialogRef.afterClosed().subscribe(result => {
-      console.log('模态框已关闭');
-      this.animal = result;
+      console.log(result);
+      if (result) {
+        this.GetAllotTasks();
+      }
+    });
+  }
+
+  /** 删除 */
+  delete(Id: string) {
+    this.service.DeleteAllotTask({ allotTaskId: Id }).subscribe(r => {
+      if (r.Status) {
+        this.GetAllotTasks();
+      }
     });
   }
 }

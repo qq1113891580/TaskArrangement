@@ -1,5 +1,76 @@
-<nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
-  <p>Content one</p>
-  <p>Content two</p>
-  <p>Content three</p>
+<nz-modal [(nzVisible)]="isVisible" nzTitle="添加" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" nzOkText='确定'
+  nzCancelText='取消'>
+  <form nz-form [formGroup]="myForm" (ngSubmit)="submitForm()">
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>登记时间</nz-form-label>
+      <nz-form-control [nzSpan]="12">
+        <nz-date-picker style="border-color: red" formControlName="RegisterTime"></nz-date-picker>
+        <nz-form-explain *ngIf="myForm.get('RegisterTime').dirty && myForm.get('RegisterTime').errors">不可为空</nz-form-explain>
+        <!-- <nz-form-explain *ngIf="myForm.value.RegisterTime > myForm.value.EstimatedTime && myForm.value.RegisterTime > myForm.value.ActualTime" -->
+          <!-- style='color: red'>登记时间不能大于预计完成时间和实际完成时间</nz-form-explain> -->
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>工作类型</nz-form-label>
+      <nz-form-control [nzSpan]="12">
+        <input nz-input formControlName="TaskCategory" placeholder="工作类型">
+        <nz-form-explain *ngIf="myForm.get('TaskCategory').dirty && myForm.get('TaskCategory').errors">不可为空</nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>所属模块</nz-form-label>
+      <nz-form-control [nzSpan]="12">
+        <input nz-input formControlName="Module" placeholder="所属模块">
+        <nz-form-explain *ngIf="myForm.get('Module').dirty && myForm.get('Module').errors">不可为空</nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7">描述</nz-form-label>
+      <nz-form-control [nzSpan]="12">
+        <textarea formControlName="Description" nz-input rows="2" placeholder="描述"></textarea>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>状态</nz-form-label>
+      <nz-form-control [nzSpan]="12">
+        <input nz-input formControlName="TaskStatus" placeholder="状态">
+        <nz-form-explain *ngIf="myForm.get('TaskStatus').dirty && myForm.get('TaskStatus').errors">不可为空</nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>处理人名字</nz-form-label>
+      <nz-form-control [nzSpan]="12">
+        <input nz-input formControlName="DisposerNames" placeholder="处理人名字">
+        <nz-form-explain *ngIf="myForm.get('DisposerNames').dirty && myForm.get('DisposerNames').errors">不可为空</nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>预计完成时间</nz-form-label>
+      <nz-form-control [nzSpan]="12">
+        <nz-date-picker style="border-color: red" formControlName="EstimatedTime"></nz-date-picker>
+        <nz-form-explain *ngIf="myForm.get('EstimatedTime').dirty && myForm.get('EstimatedTime').errors">不可为空</nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>实际完成时间</nz-form-label>
+      <nz-form-control [nzSpan]="12">
+        <nz-date-picker style="border-color: red" formControlName="ActualTime"></nz-date-picker>
+        <nz-form-explain *ngIf="myForm.get('ActualTime').dirty && myForm.get('ActualTime').errors">不可为空</nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>测试人员名字</nz-form-label>
+      <nz-form-control [nzSpan]="12">
+        <input nz-input formControlName="TesterNames" placeholder="测试人员名字">
+        <nz-form-explain *ngIf="myForm.get('TesterNames').dirty && myForm.get('TesterNames').errors">不可为空</nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>备注</nz-form-label>
+      <nz-form-control [nzSpan]="12">
+        <input nz-input formControlName="Remark" placeholder="备注">
+        <nz-form-explain *ngIf="myForm.get('Remark').dirty && myForm.get('Remark').errors">不可为空</nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
 </nz-modal>
