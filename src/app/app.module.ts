@@ -13,10 +13,9 @@ import { MenuComponent } from './menu/menu.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import { Service } from 'src/services/service';
 import { API_URL } from 'src/public/host-address';
-import { environment } from 'src/environments/environment';
 import { AuthInterceptor } from 'src/public/http-interceptor';
 import { RequestCache, RequestCacheWithMap } from 'src/public/request-cache';
-
+import { ApiUrlManagement } from 'src/public/api-url-management';
 registerLocaleData(en);
 
 @NgModule({
@@ -34,9 +33,7 @@ registerLocaleData(en);
     ErrorHandler,
     {
       provide: API_URL,
-      useValue: environment.api
-      // 'http://192.168.50.230:8123/'
-      // useValue: 'http://www.cangchu.intlive.com/'
+      useValue: ApiUrlManagement.api
     },
     [
       {
