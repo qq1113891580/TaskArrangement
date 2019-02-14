@@ -16,17 +16,27 @@ import { API_URL } from 'src/public/host-address';
 import { AuthInterceptor } from 'src/public/http-interceptor';
 import { RequestCache, RequestCacheWithMap } from 'src/public/request-cache';
 import { ApiUrlManagement } from 'src/public/api-url-management';
+import { TaskModelComponent } from './task-model/task-model.component';
+import { MatDialogModule } from '@angular/material';
+
 registerLocaleData(en);
 
 @NgModule({
-  declarations: [AppComponent, MenuComponent, TaskListComponent],
+  declarations: [
+    AppComponent,
+    MenuComponent,
+    TaskListComponent,
+    TaskModelComponent
+  ],
+  entryComponents: [TaskModelComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgZorroAntdModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
   providers: [
     Service,
