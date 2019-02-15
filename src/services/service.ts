@@ -7,7 +7,6 @@ import { ApiResult } from 'src/public/api-result';
 @Injectable()
 export class Service {
   constructor(public http: HttpClient) {}
-
   /**
    * 获取列表
    */
@@ -16,7 +15,6 @@ export class Service {
       params: GetAllotTasks as {}
     });
   }
-
   /**
    * 添加任务
    */
@@ -25,7 +23,6 @@ export class Service {
   ): Observable<ApiResult<{}>> {
     return this.http.post(ApiUrlManagement.CreateAllotTask, CreateAllotTask);
   }
-
   /**
    * 编辑任务
    */
@@ -34,7 +31,6 @@ export class Service {
   ): Observable<ApiResult<{}>> {
     return this.http.post(ApiUrlManagement.UpdateAllotTask, UpdateAllotTask);
   }
-
   /**
    * 删除任务
    */
@@ -49,7 +45,9 @@ export class Service {
  * 获取列表
  */
 export interface GetAllotTasksModel extends PageData {
+  // 排序
   orderBy?: string;
+  // 搜索内容
   search?: string;
   isDes?: string;
 }
@@ -78,21 +76,18 @@ export interface CreateAllotTaskModel {
   // 备注
   Remark?: string;
 }
-
 /**
  * 编辑任务
  */
 export interface UpdateAllotTaskModel extends CreateAllotTaskModel {
   Id?: string;
 }
-
 /**
  * 删除任务
  */
 export interface DeleteAllotTaskModel {
   allotTaskId?: string;
 }
-
 /**
  * 页码的Model
  */

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Service, GetAllotTasksModel } from 'src/services/service';
 import { MatDialog } from '@angular/material/dialog';
 import { TaskModelComponent } from '../task-model/task-model.component';
+import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-task-list',
@@ -17,7 +18,11 @@ export class TaskListComponent implements OnInit {
     pageSize: 100
   };
 
-  constructor(public service: Service, public dialog: MatDialog) {}
+  constructor(
+    public service: Service,
+    public dialog: MatDialog,
+    private message: NzMessageService
+  ) {}
 
   ngOnInit() {
     this.GetAllotTasks();
@@ -52,6 +57,8 @@ export class TaskListComponent implements OnInit {
     this.service.DeleteAllotTask({ allotTaskId: Id }).subscribe(r => {
       if (r.Status) {
         this.GetAllotTasks();
+      } else {
+        this.message.create('error', '删除失败');
       }
     });
   }

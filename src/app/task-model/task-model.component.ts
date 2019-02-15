@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Service } from 'src/services/service';
+import { NzMessageService } from 'ng-zorro-antd';
 export interface DialogData {
   /** 执行的操作 */
   o: any;
@@ -24,7 +25,8 @@ export class TaskModelComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public mydata: DialogData,
     public dialogRef: MatDialogRef<TaskModelComponent>,
     private fb: FormBuilder,
-    private service: Service
+    private service: Service,
+    private message: NzMessageService
   ) {}
 
   ngOnInit() {
@@ -50,50 +52,50 @@ export class TaskModelComponent implements OnInit {
     if (this.mydata.o === '添加') {
       this.myForm = this.fb.group({
         // 登记时间
-        RegisterTime: [null, [Validators.required]],
+        RegisterTime: [null],
         // 工作类型 0,1,2,3,4,5
-        TaskCategory: [0, [Validators.required]],
+        TaskCategory: [null],
         // 所属模块
-        Module: [null, [Validators.required]],
-        // 描述
+        Module: [null],
+        // 问题描述
         Description: [null, [Validators.required]],
         // 状态 0,1,2
-        TaskStatus: [1, [Validators.required]],
+        TaskStatus: [null],
         // 处理人名字
-        DisposerNames: [null, [Validators.required]],
+        DisposerNames: [null],
         // 预计完成时间
-        EstimatedTime: [null, [Validators.required]],
+        EstimatedTime: [null],
         // 实际完成时间
-        ActualTime: [null, [Validators.required]],
+        ActualTime: [null],
         // 测试人员名字
-        TesterNames: [null, [Validators.required]],
+        TesterNames: [null],
         // 备注
-        Remark: [null, [Validators.required]]
+        Remark: [null]
       });
     } else if (this.mydata.o === '编辑') {
       this.myForm = this.fb.group({
         // 登记时间
-        RegisterTime: [this.mydata.d.RegisterTime, [Validators.required]],
-        // 工作类型 0,1,2,3,4,5
-        TaskCategory: [this.mydata.d.TaskCategory, [Validators.required]],
+        RegisterTime: [this.mydata.d.RegisterTime],
+        // 工作类型 0,1,2,3,4,5 因为html单选组件需要的是string类型的所以需要转换
+        TaskCategory: [this.mydata.d.TaskCategory + ''],
         // 所属模块
-        Module: [this.mydata.d.Module, [Validators.required]],
-        // 描述
+        Module: [this.mydata.d.Module],
+        // 问题描述
         Description: [this.mydata.d.Description, [Validators.required]],
-        // 状态 0,1,2
-        TaskStatus: [this.mydata.d.TaskStatus, [Validators.required]],
+        // 状态 0,1,2 因为html单选组件需要的是string类型的所以需要转换
+        TaskStatus: [this.mydata.d.TaskStatus + ''],
         // 处理人名字
-        DisposerNames: [this.mydata.d.DisposerNames, [Validators.required]],
+        DisposerNames: [this.mydata.d.DisposerNames],
         // 预计完成时间
-        EstimatedTime: [this.mydata.d.EstimatedTime, [Validators.required]],
+        EstimatedTime: [this.mydata.d.EstimatedTime],
         // 实际完成时间
-        ActualTime: [this.mydata.d.ActualTime, [Validators.required]],
+        ActualTime: [this.mydata.d.ActualTime],
         // 测试人员名字
-        TesterNames: [this.mydata.d.TesterNames, [Validators.required]],
+        TesterNames: [this.mydata.d.TesterNames],
         // 备注
-        Remark: [this.mydata.d.Remark, [Validators.required]],
+        Remark: [this.mydata.d.Remark],
         // Id
-        Id: [this.mydata.d.Id, [Validators.required]]
+        Id: [this.mydata.d.Id]
       });
     }
   }
@@ -112,16 +114,28 @@ export class TaskModelComponent implements OnInit {
         this.myForm.value.EstimatedTime
       );
       this.myForm.value.ActualTime = this.ges(this.myForm.value.ActualTime);
-
+      console.log(this.myForm.value);
       if (this.mydata.o === '添加') {
         this.service.CreateAllotTask(this.myForm.value).subscribe(r => {
-          this.isVisible = false;
-          this.dialogRef.close(true);
+          if (r.Status) {
+            this.isVisible = false;
+            this.dialogRef.close(true);
+            // success error warning
+            this.message.create('success', '添加成功');
+          } else {
+            this.message.create('error', '添加失败');
+          }
         });
       } else if (this.mydata.o === '编辑') {
         this.service.UpdateAllotTask(this.myForm.value).subscribe(r => {
-          this.isVisible = false;
-          this.dialogRef.close(true);
+          if (r.Status) {
+            this.isVisible = false;
+            this.dialogRef.close(true);
+            // success error warning
+            this.message.create('success', '编辑成功');
+          } else {
+            this.message.create('error', '编辑失败');
+          }
         });
       }
     }

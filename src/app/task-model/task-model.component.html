@@ -7,13 +7,21 @@
         <nz-date-picker style="border-color: red" formControlName="RegisterTime"></nz-date-picker>
         <nz-form-explain *ngIf="myForm.get('RegisterTime').dirty && myForm.get('RegisterTime').errors">不可为空</nz-form-explain>
         <!-- <nz-form-explain *ngIf="myForm.value.RegisterTime > myForm.value.EstimatedTime && myForm.value.RegisterTime > myForm.value.ActualTime" -->
-          <!-- style='color: red'>登记时间不能大于预计完成时间和实际完成时间</nz-form-explain> -->
+        <!-- style='color: red'>登记时间不能大于预计完成时间和实际完成时间</nz-form-explain> -->
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label [nzSpan]="7" nzRequired>工作类型</nz-form-label>
       <nz-form-control [nzSpan]="12">
-        <input nz-input formControlName="TaskCategory" placeholder="工作类型">
+        <!-- <input nz-input formControlName="TaskCategory" placeholder="工作类型"> -->
+        <nz-radio-group formControlName="TaskCategory" nzName="radiogroup">
+          <label nz-radio nzValue="0">状态1</label>
+          <label nz-radio nzValue="1">状态2</label>
+          <label nz-radio nzValue="2">状态3</label>
+          <label nz-radio nzValue="3">状态4</label>
+          <label nz-radio nzValue="4">状态5</label>
+          <label nz-radio nzValue="5">状态6</label>
+        </nz-radio-group>
         <nz-form-explain *ngIf="myForm.get('TaskCategory').dirty && myForm.get('TaskCategory').errors">不可为空</nz-form-explain>
       </nz-form-control>
     </nz-form-item>
@@ -25,15 +33,21 @@
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
-      <nz-form-label [nzSpan]="7">描述</nz-form-label>
+      <nz-form-label [nzSpan]="7">问题描述</nz-form-label>
       <nz-form-control [nzSpan]="12">
-        <textarea formControlName="Description" nz-input rows="2" placeholder="描述"></textarea>
+        <textarea formControlName="Description" nz-input rows="2" placeholder="问题描述"></textarea>
+        <nz-form-explain *ngIf="myForm.get('Description').dirty && myForm.get('Description').errors">不可为空</nz-form-explain>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label [nzSpan]="7" nzRequired>状态</nz-form-label>
       <nz-form-control [nzSpan]="12">
-        <input nz-input formControlName="TaskStatus" placeholder="状态">
+        <!-- <input nz-input formControlName="TaskStatus" placeholder="状态"> -->
+        <nz-radio-group formControlName="TaskStatus" nzName="radiogroup">
+          <label nz-radio nzValue="0">状态1</label>
+          <label nz-radio nzValue="1">状态2</label>
+          <label nz-radio nzValue="2">状态3</label>
+        </nz-radio-group>
         <nz-form-explain *ngIf="myForm.get('TaskStatus').dirty && myForm.get('TaskStatus').errors">不可为空</nz-form-explain>
       </nz-form-control>
     </nz-form-item>
