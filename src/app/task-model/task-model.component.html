@@ -1,5 +1,5 @@
 <nz-modal [(nzVisible)]="isVisible" nzTitle="添加" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" nzOkText='确定'
-  nzCancelText='取消'>
+  nzCancelText='取消' [nzWidth]='790'>
   <form nz-form [formGroup]="myForm" (ngSubmit)="submitForm()">
     <nz-form-item>
       <nz-form-label [nzSpan]="7" nzRequired>登记时间</nz-form-label>
@@ -15,12 +15,12 @@
       <nz-form-control [nzSpan]="12">
         <!-- <input nz-input formControlName="TaskCategory" placeholder="工作类型"> -->
         <nz-radio-group formControlName="TaskCategory" nzName="radiogroup">
-          <label nz-radio nzValue="0">状态1</label>
-          <label nz-radio nzValue="1">状态2</label>
-          <label nz-radio nzValue="2">状态3</label>
-          <label nz-radio nzValue="3">状态4</label>
-          <label nz-radio nzValue="4">状态5</label>
-          <label nz-radio nzValue="5">状态6</label>
+          <label nz-radio nzValue="0">优化</label>
+          <label nz-radio nzValue="1">系统bug</label>
+          <label nz-radio nzValue="2">新功能</label>
+          <label nz-radio nzValue="3">功能修改后引起的bug</label>
+          <label nz-radio nzValue="4">新增需求</label>
+          <label nz-radio nzValue="5">需求变更</label>
         </nz-radio-group>
         <nz-form-explain *ngIf="myForm.get('TaskCategory').dirty && myForm.get('TaskCategory').errors">不可为空</nz-form-explain>
       </nz-form-control>
@@ -44,9 +44,9 @@
       <nz-form-control [nzSpan]="12">
         <!-- <input nz-input formControlName="TaskStatus" placeholder="状态"> -->
         <nz-radio-group formControlName="TaskStatus" nzName="radiogroup">
-          <label nz-radio nzValue="0">状态1</label>
-          <label nz-radio nzValue="1">状态2</label>
-          <label nz-radio nzValue="2">状态3</label>
+          <label nz-radio nzValue="0">已解决</label>
+          <label nz-radio nzValue="1">未解决</label>
+          <label nz-radio nzValue="2">待测试</label>
         </nz-radio-group>
         <nz-form-explain *ngIf="myForm.get('TaskStatus').dirty && myForm.get('TaskStatus').errors">不可为空</nz-form-explain>
       </nz-form-control>

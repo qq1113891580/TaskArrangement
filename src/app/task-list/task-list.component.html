@@ -1,7 +1,7 @@
 <div style="padding-top: 50px">
   <button nz-button nzType="primary" style='margin-bottom: 20PX;' (click)="openDialog('添加')">添加</button>
   <nz-input-group nzSearch [nzSuffix]="suffixIconButton" style='width:240px;float: right;'>
-    <input [(ngModel)]="search" type="search" nz-input placeholder="请输入搜索内容">
+    <input [(ngModel)]="search" type="search" nz-input (keyup)="onSearchKeyUp($event,search)" placeholder="请输入搜索内容">
   </nz-input-group>
   <ng-template #suffixIconButton>
     <button nz-button nzType="primary" nzSearch (click)="listsearch(search)"><i nz-icon type="search"></i></button>
@@ -27,10 +27,21 @@
     <tbody>
       <tr *ngFor="let data of basicTable.data">
         <td>{{data.RegisterTime|date:'yyyy-MM-dd HH:mm'}}</td>
-        <td>{{data.TaskCategory}}</td>
+        <td>
+          <span *ngIf="data.TaskCategory === 0">优化</span>
+          <span *ngIf="data.TaskCategory === 1">系统bug</span>
+          <span *ngIf="data.TaskCategory === 2">新功能</span>
+          <span *ngIf="data.TaskCategory === 3">功能修改后引起的bug</span>
+          <span *ngIf="data.TaskCategory === 4">新增需求</span>
+          <span *ngIf="data.TaskCategory === 5">需求变更</span>
+        </td>
         <td>{{data.Module}}</td>
         <td>{{data.Description}}</td>
-        <td>{{data.TaskStatus}}</td>
+        <td>
+            <span *ngIf="data.TaskStatus === 0">已解决</span>
+            <span *ngIf="data.TaskStatus === 1">未解决</span>
+            <span *ngIf="data.TaskStatus === 2">待测试</span>
+        </td>
         <td>{{data.DisposerNames}}</td>
         <td>{{data.EstimatedTime|date:'yyyy-MM-dd HH:mm'}}</td>
         <td>{{data.ActualTime|date:'yyyy-MM-dd HH:mm'}}</td>

@@ -44,6 +44,16 @@ export class TaskListComponent implements OnInit {
     this.GetAllotTasks();
   }
 
+  /**监听回车搜索
+   *  @param event 根据页面传回来的event
+   *  @param search 搜索内容
+   */
+  onSearchKeyUp(event: any, search: string) {
+    if ('Enter' === event.key) {
+      this.listsearch(search);
+    }
+  }
+
   /** 获取任务列表 */
   GetAllotTasks() {
     this.listloading = true;
