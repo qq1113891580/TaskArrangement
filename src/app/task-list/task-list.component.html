@@ -1,6 +1,14 @@
 <div style="padding-top: 50px">
   <button nz-button nzType="primary" style='margin-bottom: 20PX;' (click)="openDialog('添加')">添加</button>
-  <nz-table #basicTable [nzData]="mylist" [nzSize]="'small'">
+  <nz-input-group nzSearch [nzSuffix]="suffixIconButton" style='width:240px;float: right;'>
+    <input [(ngModel)]="search" type="search" nz-input placeholder="请输入搜索内容">
+  </nz-input-group>
+  <ng-template #suffixIconButton>
+    <button nz-button nzType="primary" nzSearch (click)="listsearch(search)"><i nz-icon type="search"></i></button>
+  </ng-template>
+  <nz-table #basicTable [nzData]="mylist" [nzSize]="'small'" [nzFrontPagination]='false' [nzTotal]='TotalCount'
+    [(nzPageIndex)]='pageIndex' [nzPageSize]='GAT.pageSize' [nzLoading]='listloading' [nzShowQuickJumper]='true'
+    (nzPageIndexChange)='GetAllotTasks()'>
     <thead>
       <tr>
         <th>登记时间</th>
