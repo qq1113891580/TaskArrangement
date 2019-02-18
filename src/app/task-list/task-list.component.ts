@@ -69,7 +69,7 @@ export class TaskListComponent implements OnInit {
   }
 
   /** 开启模态框 */
-  openDialog(operation: string, data: any): void {
+  openDialog(operation: string, data?: any): void {
     const dialogRef = this.dialog.open(TaskModelComponent, {
       data: { o: operation, d: data }
     });
