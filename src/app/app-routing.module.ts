@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { TaskListComponent } from './task-list/task-list.component';
+import { LogInComponent } from './log-in/log-in.component';
 
 const routes: Routes = [
-  { path: '', component: TaskListComponent, pathMatch: 'full' }
+  { path: '', redirectTo: 'TaskList', pathMatch: 'full' },
+  { path: 'LogIn', component: LogInComponent },
+  { path: 'TaskList', component: TaskListComponent }
 ];
 
 @NgModule({

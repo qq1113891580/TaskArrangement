@@ -1,5 +1,6 @@
 <div style="padding-top: 50px">
   <button nz-button nzType="primary" style='margin-bottom: 20PX;' (click)="openDialog('添加')">添加</button>
+  <button nz-button nzType="primary" style='margin-bottom: 20PX;margin-left: 20px;' [routerLink]="['/LogIn']">测试</button>
   <nz-input-group nzSearch [nzSuffix]="suffixIconButton" style='width:240px;float: right;'>
     <input [(ngModel)]="search" type="search" nz-input (keyup)="onSearchKeyUp($event,search)" placeholder="请输入搜索内容">
   </nz-input-group>
@@ -38,9 +39,9 @@
         <td>{{data.Module}}</td>
         <td>{{data.Description}}</td>
         <td>
-            <span *ngIf="data.TaskStatus === 0">已解决</span>
-            <span *ngIf="data.TaskStatus === 1">未解决</span>
-            <span *ngIf="data.TaskStatus === 2">待测试</span>
+          <span *ngIf="data.TaskStatus === 0">已解决</span>
+          <span *ngIf="data.TaskStatus === 1">未解决</span>
+          <span *ngIf="data.TaskStatus === 2">待测试</span>
         </td>
         <td>{{data.DisposerNames}}</td>
         <td>{{data.EstimatedTime|date:'yyyy-MM-dd HH:mm'}}</td>

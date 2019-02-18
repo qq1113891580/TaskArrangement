@@ -18,6 +18,7 @@ import { RequestCache, RequestCacheWithMap } from 'src/public/request-cache';
 import { ApiUrlManagement } from 'src/public/api-url-management';
 import { TaskModelComponent } from './task-model/task-model.component';
 import { MatDialogModule } from '@angular/material';
+import { LogInComponent } from './log-in/log-in.component';
 
 registerLocaleData(zh);
 
@@ -26,7 +27,8 @@ registerLocaleData(zh);
     AppComponent,
     MenuComponent,
     TaskListComponent,
-    TaskModelComponent
+    TaskModelComponent,
+    LogInComponent
   ],
   entryComponents: [TaskModelComponent],
   imports: [
